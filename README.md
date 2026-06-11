@@ -6,6 +6,9 @@ https://baseball-proto.vercel.app
 
 타격 위치 · 발사각 · 타구 속도(EV) · 방향각 4개 파라미터로 중력 기반 궤적을 계산해 렌더하고, 구장을 5개 zone 으로 부채꼴 분할해 착지 분포를 색상으로 시각화합니다. 단일 · 일괄(랜덤 5개) 시뮬레이션을 지원하며, 결과 테이블의 다중 선택 · zone 필터링이 야구장 하이라이트와 양방향으로 연동됩니다.
 
+## 스크린샷
+<img width="3442" height="1828" alt="Group 1" src="https://github.com/user-attachments/assets/16e3779c-7cf8-46f6-8f33-e6cae3c02d87" />
+
 ## 기술 스택
 
 - **3D / WebGL**: Three.js 0.174, @react-three/fiber 8, @react-three/drei 9, meshline 3
