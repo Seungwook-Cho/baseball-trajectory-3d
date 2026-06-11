@@ -14,9 +14,7 @@ https://baseball-proto.vercel.app
 - **UI**: HeroUI, react-circular-slider-svg, Tailwind CSS
 - **배포**: Vercel
 
-## 구현 포인트
-
-### 3D 렌더링 / 시뮬레이션
+## 3D 렌더링 / 시뮬레이션
 
 **굵은 궤적 라인 렌더**
 - WebGL 스펙상 `gl.LineWidth` 가 1 이상의 값을 무시해서, 기본 Three.js `<Line>` 으로는 궤적이 너무 가늘어 안 보이는 문제가 있었습니다. Line2 (LineGeometry + LineMaterial) 를 먼저 시도했지만 동적 업데이트 시 geometry 재바인딩이 불안정했습니다. meshline 으로 전환해, 매번 새로 생성되는 궤적과 포커스 시 굵기 · 색상 전환까지 안정적으로 렌더했습니다.
@@ -38,7 +36,7 @@ https://baseball-proto.vercel.app
 **Three.js 0.175 호환성 회피**
 - drei `<Text>` 컴포넌트가 Three 0.175 에서 zone 라벨 · UI 텍스트가 깨지는 문제로 0.174 로 다운그레이드했습니다.
 
-### 상태 관리 / 데이터 시각화
+## 상태 관리 / 데이터 시각화
 
 **trajectories ↔ zones ↔ focused state 동기화**
 - 테이블 행 클릭 → 야구장 궤적 강조, 야구장 zone 클릭 → 테이블 필터링이 양방향이라 props drilling 으로 풀면 컴포넌트 간 결합도가 빠르게 올라갑니다. Zustand store 하나에 trajectories · zones · focused id 를 모두 넣고 컴포넌트마다 selector 로 구독했습니다. 어디서든 동일한 상태를 참조할 수 있고, 새 화면을 붙여도 props 변경 없이 연결됩니다.
@@ -49,7 +47,7 @@ https://baseball-proto.vercel.app
 **테이블 · 야구장 양방향 하이라이트**
 - 결과가 누적되면 "지금 테이블에서 보고 있는 행이 야구장의 어느 궤적인지" 헷갈리기 시작합니다. focused id 가 있으면 해당 궤적은 빨강 · 굵게, 다른 궤적은 황금색 · 기본 굵기로 렌더해 테이블과 야구장의 시각적 연결을 유지합니다.
 
-### UI / 인터랙션
+## UI / 인터랙션
 
 **원형 슬라이더로 발사각 컨트롤**
 - 발사각 (10°~85°) 은 0°~360° 가 아니라 수직 방향의 의미가 있는 각도라, 일반 horizontal slider 로는 "공이 어디로 날아갈지" 가 직관적으로 안 읽힙니다. react-circular-slider-svg 로 시계 방향 호를 그리고 SVG 화살표 아이콘으로 현재 발사 방향을 함께 표시했습니다. UI 자체가 결과의 미리보기 역할을 합니다.
